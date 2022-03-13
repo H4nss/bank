@@ -1,6 +1,9 @@
 {
   "code-runner.defaultLanguage": "cpp",
+  "code-runner.runInTerminal": true,
+  "code-runner.clearPreviousOutput": true,
   "code-runner.executorMap": {
+    // po nazwie ( $fileName ) powinny byc wszystkie sciezki do plikow, ktore importujemy w main.cpp
     "cpp": "cd $dir && g++ $fileName classes/User/User.cpp -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
   }
 }
