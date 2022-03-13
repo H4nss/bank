@@ -5,6 +5,7 @@
 
 using namespace std;
 
+// inicjalizacja klasy z jej metodami i polami
 class User {
 public:
   string name;
