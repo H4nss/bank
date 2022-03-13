@@ -1,16 +1,20 @@
+#ifndef USER_H
+#define USER_H
+
 #include <string>
 
 using namespace std;
 
 class User {
+public:
   string name;
 
 private:
   string password;
 
 public:
-  void login(string username, string userPassword) {
-    name = username;
-    password = userPassword;
-  }
+  User();
+  void login(string username, string userPassword);
 };
+
+#endif
