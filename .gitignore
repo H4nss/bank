@@ -1,1 +1,6 @@
-.vscode
+pliki renderowane na Windows, ktore sa zbedne
+src/main.exe
+
+pliki renderowane na macOS, ktore sa zbedne
+src/main
+**/.DS_Store
