@@ -13,7 +13,7 @@ const std::string CHFcode = "CHF";
 const std::string GBPcode = "CHF";
 
 Currency::Currency() {
-  code = "PLN";
+  code = Currency::PLNcode;
 }
 
 Currency::Currency(std::string currencyCode){
@@ -21,7 +21,7 @@ Currency::Currency(std::string currencyCode){
     code = currencyCode;
   }
 
-  code = "PLN";
+  code = Currency::PLNcode;
   ratio = Currency::getCurrencyRatio(currencyCode);
 }
 
