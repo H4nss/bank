@@ -15,6 +15,11 @@ class Currency {
   static const double USDratio;
   static const double CHFratio;
   static const double GBPratio;
+  static const std::string PLNcode;
+  static const std::string EURcode;
+  static const std::string USDcode;
+  static const std::string CHFcode;
+  static const std::string GBPcode;
 
   bool isValidInputCode(std::string inputCode);
   std::string code;

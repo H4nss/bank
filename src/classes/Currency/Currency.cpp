@@ -1,11 +1,16 @@
 #include "Currency.h";
 
-const std::vector<std::string> Currency::codes {"PLN", "EUR", "USD", "CHF", "GBP"};
+const std::vector<std::string> Currency::codes {Currency::PLNcode, Currency::EURcode, Currency::USDcode, Currency::CHFcode, Currency::GBPcode};
 const double PLNratio = 1;
 const double EURratio = 0.21;
 const double USDratio = 0.22;
 const double CHFratio = 0.22;
 const double GBPratio = 0.18;
+const std::string PLNcode = "PLN";
+const std::string EURcode = "EUR";
+const std::string USDcode = "USD";
+const std::string CHFcode = "CHF";
+const std::string GBPcode = "CHF";
 
 Currency::Currency() {
   code = "PLN";
@@ -37,23 +42,23 @@ bool Currency::isValidInputCode(std::string code) {
 }
 
 double Currency::getCurrencyRatio(std::string code) {
-  if (code == "PLN") {
+  if (code == Currency::PLNcode) {
     return PLNratio;
   }
 
-  if (code == "EUR") {
+  if (code == Currency::EURcode) {
     return EURratio;
   }
 
-  if (code == "USD") {
+  if (code == Currency::USDcode) {
     return USDratio;
   }
 
-  if (code == "CHF") {
+  if (code == Currency::CHFcode) {
     return CHFratio;
   }
 
-  if (code == "GBP") {
+  if (code == Currency::GBPcode) {
     return GBPratio;
   }
 
