@@ -11,11 +11,11 @@ double Bill::getBalance() {
 }
 
 std::string Bill::getBalanceWithCurrency() {
-  return std::to_string(balance) + " " + currency.code;
+  return std::to_string(balance) + " " + currency.getCode();
 }
 
 std::string Bill::getCurrencyType() {
-  return currency.code;
+  return currency.getCode();
 }
 
 double Bill::deposit(double amount) {
@@ -39,10 +39,7 @@ double Bill::withdraw(double amount) {
 }
 
 double Bill::getConvertedTo(Currency currencyTo) {
-  std::string currencyCodeTo = currencyTo.code;
-
-  double convertRatio = currency.getCurrencyConvertRatio(currency.code, currencyCodeTo);
-
+  double convertRatio = currency.getCurrencyConvertRatioTo(currencyTo.getCode());
 
   return balance * convertRatio;
 }
