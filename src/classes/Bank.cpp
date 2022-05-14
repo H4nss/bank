@@ -96,7 +96,8 @@ void Bank::mainBankScreen()
     std::cout << "         3.    Dodaj srodki     \n";
     std::cout << "         4.    Wyplac srodki    \n";
     std::cout << "         5.    Kantor           \n";
-    std::cout << "         6.    Wyloguj sie      \n\n";
+    std::cout << "         6.    Lista transakcji           \n";
+    std::cout << "         7.    Wyloguj sie      \n\n";
 
     int option;
     std::cout << "         Wybierz Opcje wpisujac liczbe: ";
@@ -121,6 +122,9 @@ void Bank::mainBankScreen()
         moneyChangerScreen();
         break;
     case 6:
+        TransferListScreen();
+        break;
+    case 7:
         exitScreen();
         break;
     default:
@@ -443,7 +447,40 @@ void Bank::moneyChangerScreen()
 void Bank::transferScreen()
 {
     header();
-    std::cout << "         W budowie ";
+    std::string username;
+    short currency, check;
+    long double money;
+    std::cout << "         Podaj id uzytkownika do ktorego chcesz wykonac przelew: ";
+    std::cin >> username;
+    if (username == User.name)
+    {
+        std::cout << "         Nie mozesz sam do siebie wyslac przelew";
+        getch();
+        mainBankScreen();
+    }
+    std::cout << "         1 PLN        2 EUR        3 USD        4 CHF        5 GBP\n\n";
+    std::cout << "         Wybierz Walute: ";
+    std::cin >> currency;
+    std::cout << "         Podaj kwote: ";
+    std::cin >> money;
+    std::string CurrencyTab[] = {"PLN", "EUR", "USD", "CHF", "GBP"};
+    check = User.Transfer(money, currency, username);
+    if (check == 1)
+        std::cout << "         Udalo sie wykonac przelew do " << username << " na kwote " << money << CurrencyTab[currency - 1];
+    else if (check == 2)
+        std::cout << "\n         Niewystarczajace srodki na koncie\n";
+    else if (check == 3)
+        std::cout << "\n         Uzytkownik nie istnieje\n";
+    else
+        std::cout << "\n         Nie znany blad\n";
+    getch();
+    mainBankScreen();
+}
+void Bank::TransferListScreen()
+{
+    header();
+    std::cout << "          Lista tranzakcji: \n";
+    User.raportTransferRead();
     getch();
     mainBankScreen();
 }

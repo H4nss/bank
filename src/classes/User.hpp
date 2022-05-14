@@ -16,6 +16,9 @@ public:
     bool RegisterUser(std::string username, std::string password);
     bool withdraw(long double n, short currency);
     long double moneyChanger(long double n, short currencyO, short currencyS);
+    short Transfer(long double n, short currency, std::string username);
+    bool raportTransfer(long double n, short currency, std::string username);
+    void raportTransferRead();
 
 private:
 };

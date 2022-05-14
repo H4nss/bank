@@ -22,6 +22,7 @@ public:
     void moneyChangerScreen();
     void transferScreen();
     void successChange(long double money, long double change, short currency);
+    void TransferListScreen();
 
 private:
     User User;
