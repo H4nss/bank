@@ -96,7 +96,8 @@ void Bank::mainBankScreen()
     std::cout << "         3.    Wyplac srodki    \n";
     std::cout << "         4.    Konto Walutowe   \n";
     std::cout << "         5.    Skarbonka        \n";
-    std::cout << "         6.    Wyloguj sie    \n\n";
+    std::cout << "         6.    Lista transakcji           \n";
+    std::cout << "         7.    Wyloguj sie      \n\n";
 
     int option;
     std::cout << "         Wybierz Opcje wpisujac liczbe: ";
@@ -127,6 +128,9 @@ void Bank::mainBankScreen()
         piggyBank();
         break;
     case 6:
+        TransferListScreen();
+        break;
+    case 7:
         exitScreen();
         break;
     default:
@@ -157,7 +161,6 @@ void Bank::depositeScreen()
         successWithdrawDeposit(money, "PLN", 0);
         mainBankScreen();
         break;
-    
     default:
         std::cin.clear();            // Obsługa błedu wejścia np 1231 abr4523
         std::cin.ignore(1000, '\n'); // Obsługa błedu wejścia np 1231 abr4523
@@ -252,7 +255,40 @@ void Bank::failWithdraw()
 void Bank::transferScreen()
 {
     header();
-    std::cout << "         W budowie ";
+    std::string username;
+    short currency=1, check;
+    long double money;
+    std::cout << "         Podaj id uzytkownika do ktorego chcesz wykonac przelew: ";
+    std::cin >> username;
+    if (username == User.name)
+    {
+        std::cout << "         Nie mozesz sam do siebie wyslac przelew";
+        getch();
+        mainBankScreen();
+    }
+    //std::cout << "         1 PLN        2 EUR        3 USD        4 CHF        5 GBP\n\n";
+    //std::cout << "         Wybierz Walute: ";
+    //std::cin >> currency;
+    std::cout << "         Podaj kwote: ";
+    std::cin >> money;
+    std::string CurrencyTab[] = {"PLN", "EUR", "USD", "CHF", "GBP"};
+    check = User.Transfer(money, currency, username);
+    if (check == 1)
+        std::cout << "         Udalo sie wykonac przelew do " << username << " na kwote " << money << CurrencyTab[currency - 1];
+    else if (check == 2)
+        std::cout << "\n         Niewystarczajace srodki na koncie\n";
+    else if (check == 3)
+        std::cout << "\n         Uzytkownik nie istnieje\n";
+    else
+        std::cout << "\n         Nie znany blad\n";
+    getch();
+    mainBankScreen();
+}
+void Bank::TransferListScreen()
+{
+    header();
+    std::cout << "          Lista tranzakcji: \n";
+    User.raportTransferRead();
     getch();
     mainBankScreen();
 }
@@ -349,7 +385,7 @@ void Bank::transferScreen()
             std::cout << "-----------------  Twoje pieniadze na Koncie Bankowym: | " << User.PLN << " zl |" << std::endl;
             std::cout << "|   Skarbonka   |" << std::endl;
             std::cout << "-----------------  Twoje pieniadze w Skarbonce: | " << User.SKARBONKA << " zl | " << std::endl;
-            std::cout<<std::endl<<"Piggybank to program, ktory umozliwia odlozenie swoich pieniedzy w bezpieczne miejsce. Aby wplacic pieniadze do Skarbonki,"<<std::endl;
+            std::cout<<std::endl<<"Skarbonka to program, ktory umozliwia odlozenie swoich pieniedzy w bezpieczne miejsce. Aby wplacic pieniadze do Skarbonki,"<<std::endl;
             std::cout<<"musisz przelac je ze swojego Konta Bankowego, wybierajac opcje nr 1 w menu Skarbonki. Pieniadze, ktore znajduja sie w Skarbonce, "<<std::endl;
             std::cout<<"mozesz wyplacic w kazdym momencie, wybierajac opcje nr 2 w menu Skarbonki. Mozesz wyjsc ze Skarbonki, korzystajac z opcji nr 3 w Menu Skarbonki."<<std::endl;
             std::cout<<std::endl<<"Aby wyjsc z opcji Pomoc, nacisnij dowolny klawisz.";
@@ -677,7 +713,7 @@ void Bank::foreignCurrency()
         {
             system("cls");
             menuForeignCurrency();
-            std::cout << "Zly choice opcji, Podaj twoj choice ponownie." << std::endl << std::endl;
+            std::cout << "Zly wybor opcji, Podaj twoj wybor ponownie." << std::endl << std::endl;
             anotherChoice();
             foreignCurrency();
         }
@@ -716,7 +752,7 @@ void Bank::foreignCurrency()
     {
         system("cls");
         menuForeignCurrency();
-        std::cout << "Zly choice opcji, Podaj twoj choice ponownie." << std::endl << std::endl;
+        std::cout << "Zly wybor opcji, Podaj twoj wybor ponownie." << std::endl << std::endl;
         anotherChoice();
         foreignCurrency();
         break;

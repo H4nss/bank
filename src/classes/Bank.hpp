@@ -5,8 +5,6 @@
 #include <iomanip>
 #include <string>
 #include <vector>
-#include <string>
-
 class Bank
 {
 public:
@@ -24,7 +22,8 @@ public:
     void moneyChangerScreen();
     void transferScreen();
     void successChange(long double money, long double change, short currency);
-    
+    void TransferListScreen();
+
     void menuPiggyBank(); //Menu Skarbonki
     void piggyBank(); //Skarbonka
     void choice (); // wybor opcji w menu Skarbonki
