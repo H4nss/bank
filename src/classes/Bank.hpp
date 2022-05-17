@@ -35,7 +35,7 @@ public:
     void menuForeignCurrency(); //Menu Konta Walutowego
 
     char sign, firstSign; //zmienne odpowiadajace za opcje w Skarbonce i Koncie Walutowym
-    double a = 0, b = 0; //zmienne sluzace przy zamianie walut
+    double option2 = 0, option3 = 0; //zmienne sluzace przy zamianie walut
     char firstChoice, secondChoice; //wybor walut do zamiany
     std::string firstCurrency, secondCurrency; //wyswietlanie nazw walut w opisach
 

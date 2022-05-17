@@ -306,7 +306,7 @@ void Bank::TransferListScreen()
 
     void Bank::piggyBank() //Skarbonka
     {
-        double x = 0,t=0;
+        double option1 = 0; //zmienna sluzaca przy dodawaniu i odejmowaniu pieniedzy z PLN i Skarbonki
 
         switch (sign)
         {
@@ -319,16 +319,15 @@ void Bank::TransferListScreen()
             std::cout << "-----------------  Twoje pieniadze w Skarbonce: | " << User.piggyAccount << " zl | " << std::endl;
             std::cout << std::endl << "Twoje pieniadze, ktore wyplacisz ze swojego Konta Bankowego, beda istnialy w twojej Skarbonce. " << std::endl;
             std::cout << "Podaj ilosc pieniedzy w celu dodania ich do Skarbonki: ";
-            std::cin >> x;
+            std::cin >> option1;
             std::cout<<std::endl;
             
-            if (x <= User.PLN)
+            if (option1 <= User.PLN)
             {   
-                User.deposit(x, 6); // wplata pieniedzy do Skarbonki
-                User.withdraw(x, 1); // wyplata pieniedzy PLN
-                t = x;
+                User.deposit(option1, 6); // wplata pieniedzy do Skarbonki
+                User.withdraw(option1, 1); // wyplata pieniedzy PLN
                 
-                std::cout << "Wplaciles " << x << " zl do twojej Skarbonki.";
+                std::cout << "Wplaciles " << option1 << " zl do twojej Skarbonki.";
                 getch();
             }
             else
@@ -349,15 +348,14 @@ void Bank::TransferListScreen()
             std::cout << "-----------------  Twoje pieniadze w Skarbonce: | " << User.piggyAccount << " zl | " << std::endl;
             std::cout << std::endl << "Twoje pieniadze, ktore wyplacisz ze swojej Skarbonki, beda istnialy na twoim Koncie Bankowym. " << std::endl;
             std::cout << "Podaj ilosc pieniedzy w celu dodania ich do twojego Konta Bankowego: ";
-            std::cin >> x;
+            std::cin >> option1;
             std::cout<<std::endl;
 
-            if (x <= User.piggyAccount)
+            if (option1 <= User.piggyAccount)
             {
-                User.deposit(x, 1); // wplata pieniedzy PLN
-                User.withdraw(x, 6); // wyplata pieniedzy ze Skarbonki
-                t = x;
-                std::cout << "Wyplaciles " << x << " zl ze swojej Skarbonki.";
+                User.deposit(option1, 1); // wplata pieniedzy PLN
+                User.withdraw(option1, 6); // wyplata pieniedzy ze Skarbonki
+                std::cout << "Wyplaciles " << option1 << " zl ze swojej Skarbonki.";
                 getch();
             }
             else
@@ -410,41 +408,41 @@ void Bank::TransferListScreen()
 
 void Bank::changePLN() //zamiana PLN-->x, liczba z przecinkiem to kurs waluty x-->PLN
 {
-    if (a <= User.PLN)
+    if (option2 <= User.PLN)
     {
         if (firstChoice == '1' && secondChoice == '2')
         {
             firstCurrency = " Zl";
             secondCurrency = " Euro";
-            b = a / 4.65;
-            User.deposit(b, 2); // wplata pieniedzy EUR
-            User.withdraw(a, 1); // wyplata pieniedzy PLN
+            option3 = option2 / 4.65;
+            User.deposit(option3, 2); // wplata pieniedzy EUR
+            User.withdraw(option2, 1); // wyplata pieniedzy PLN
         }
         if (firstChoice == '1' && secondChoice == '3')
         {
             firstCurrency = " Zl";
             secondCurrency = " $";
-            b = a / 4.42;
-            User.deposit(b, 3); // wplata pieniedzy USD
-            User.withdraw(a, 1); // wyplata pieniedzy PLN
+            option3 = option2 / 4.42;
+            User.deposit(option3, 3); // wplata pieniedzy USD
+            User.withdraw(option2, 1); // wyplata pieniedzy PLN
         }
         if (firstChoice == '1' && secondChoice == '4')
         {
             firstCurrency = " Zl";
             secondCurrency = " Fr";
-            b = a / 4.44;
-            User.deposit(b, 4); // wplata pieniedzy CHF
-            User.withdraw(a, 1); // wyplata pieniedzy PLN
+            option3 = option2 / 4.44;
+            User.deposit(option3, 4); // wplata pieniedzy CHF
+            User.withdraw(option2, 1); // wyplata pieniedzy PLN
         }
         if (firstChoice == '1' && secondChoice == '5')
         {
             firstCurrency = " Zl";
             secondCurrency = " L";
-            b = a / 5.52;
-            User.deposit(b, 5); // wplata pieniedzy GBP
-            User.withdraw(a, 1); // wyplata pieniedzy PLN
+            option3 = option2 / 5.52;
+            User.deposit(option3, 5); // wplata pieniedzy GBP
+            User.withdraw(option2, 1); // wyplata pieniedzy PLN
         }
-        std::cout << "Zamieniles " << a << firstCurrency << " na " << b << secondCurrency << ".";
+        std::cout << "Zamieniles " << option2 << firstCurrency << " na " << option3 << secondCurrency << ".";
     }
     else
     {
@@ -455,41 +453,41 @@ void Bank::changePLN() //zamiana PLN-->x, liczba z przecinkiem to kurs waluty x-
 
 void Bank::changeEUR() //zamiana EUR-->x, liczba z przecinkiem to kurs waluty x-->EUR
 {
-    if (a <= User.EUR)
+    if (option2 <= User.EUR)
     {
         if (firstChoice == '2' && secondChoice == '1')
         {
             firstCurrency = " Euro";
             secondCurrency = " Zl";
-            b = a / 0.21;
-            User.deposit(b, 1); // wplata pieniedzy PLN
-            User.withdraw(a, 2); // wyplata pieniedzy EUR
+            option3 = option2 / 0.21;
+            User.deposit(option3, 1); // wplata pieniedzy PLN
+            User.withdraw(option2, 2); // wyplata pieniedzy EUR
         }
         if (firstChoice == '2' && secondChoice == '3')
         {
             firstCurrency = " Euro";
             secondCurrency = " $";
-            b = a / 0.95;
-            User.deposit(b, 3); // wplata pieniedzy USD
-            User.withdraw(a, 2); // wyplata pieniedzy EUR
+            option3 = option2 / 0.95;
+            User.deposit(option3, 3); // wplata pieniedzy USD
+            User.withdraw(option2, 2); // wyplata pieniedzy EUR
         }
         if (firstChoice == '2' && secondChoice == '4')
         {
             firstCurrency = " Euro";
             secondCurrency = " Fr";
-            b = a / 0.95;
-            User.deposit(b, 4); // wplata pieniedzy CHF
-            User.withdraw(a, 2); // wyplata pieniedzy EUR
+            option3 = option2 / 0.95;
+            User.deposit(option3, 4); // wplata pieniedzy CHF
+            User.withdraw(option2, 2); // wyplata pieniedzy EUR
         }
         if (firstChoice == '2' && secondChoice == '5')
         {
             firstCurrency = " Euro";
             secondCurrency = " L";
-            b = a / 1.18;
-            User.deposit(b, 5); // wplata pieniedzy GBP
-            User.withdraw(a, 2); // wyplata pieniedzy EUR
+            option3 = option2 / 1.18;
+            User.deposit(option3, 5); // wplata pieniedzy GBP
+            User.withdraw(option2, 2); // wyplata pieniedzy EUR
         }
-        std::cout << "Zamieniles " << a << firstCurrency << " na " << b << secondCurrency << ".";
+        std::cout << "Zamieniles " << option2 << firstCurrency << " na " << option3 << secondCurrency << ".";
     }
     else
     {
@@ -500,41 +498,41 @@ void Bank::changeEUR() //zamiana EUR-->x, liczba z przecinkiem to kurs waluty x-
 
 void Bank::changeUSD() //zamiana USD-->x, liczba z przecinkiem to kurs waluty x-->USD
 {
-    if (a <= User.USD)
+    if (option2 <= User.USD)
     {
         if (firstChoice == '3' && secondChoice == '1')
         {
             firstCurrency = " $";
             secondCurrency = " Zl";
-            b = a / 0.23;
-            User.deposit(b, 1); // wplata pieniedzy PLN
-            User.withdraw(a, 3); // wyplata pieniedzy USD
+            option3 = option2 / 0.23;
+            User.deposit(option3, 1); // wplata pieniedzy PLN
+            User.withdraw(option2, 3); // wyplata pieniedzy USD
         }
         if (firstChoice == '3' && secondChoice == '2')
         {
             firstCurrency = " $";
             secondCurrency = " Euro";
-            b = a / 1.05;
-            User.deposit(b, 2); // wplata pieniedzy EUR
-            User.withdraw(a, 3); // wyplata pieniedzy USD
+            option3= option2 / 1.05;
+            User.deposit(option3, 2); // wplata pieniedzy EUR
+            User.withdraw(option2, 3); // wyplata pieniedzy USD
         }
         if (firstChoice == '3' && secondChoice == '4')
         {
             firstCurrency = " $";
             secondCurrency = " Fr";
-            b = a / 1.01;
-            User.deposit(b, 4); // wplata pieniedzy CHF
-            User.withdraw(a, 3); // wyplata pieniedzy USD
+            option3 = option2 / 1.01;
+            User.deposit(option3, 4); // wplata pieniedzy CHF
+            User.withdraw(option2, 3); // wyplata pieniedzy USD
         }
         if (firstChoice == '3' && secondChoice == '5')
         {
             firstCurrency = " $";
             secondCurrency = " L";
-            b = a / 1.25;
-            User.deposit(b, 5); // wplata pieniedzy GBP
-            User.withdraw(a, 3); // wyplata pieniedzy USD
+            option3 = option2 / 1.25;
+            User.deposit(option3, 5); // wplata pieniedzy GBP
+            User.withdraw(option2, 3); // wyplata pieniedzy USD
         }
-        std::cout << "Zamieniles " << a << firstCurrency << " na " << b << secondCurrency << "."<< std::endl << std::endl;
+        std::cout << "Zamieniles " << option2 << firstCurrency << " na " << option3 << secondCurrency << "."<< std::endl << std::endl;
     }
     else
     {
@@ -545,41 +543,41 @@ void Bank::changeUSD() //zamiana USD-->x, liczba z przecinkiem to kurs waluty x-
 
 void Bank::changeCHF() //zamiana CHF-->x, liczba z przecinkiem to kurs waluty x-->CHF
 {
-    if (a <= User.CHF)
+    if (option2 <= User.CHF)
     {
         if (firstChoice == '4' && secondChoice == '1')
         {
             firstCurrency = " Fr";
             secondCurrency = " Zl";
-            b = a / 0.23;
-            User.deposit(b, 1); // wplata pieniedzy PLN
-            User.withdraw(a, 4); // wyplata pieniedzy CHF
+            option3 = option2 / 0.23;
+            User.deposit(option3, 1); // wplata pieniedzy PLN
+            User.withdraw(option2, 4); // wyplata pieniedzy CHF
         }
         if (firstChoice == '4' && secondChoice == '2')
         {
             firstCurrency = " Fr";
             secondCurrency = " Euro";
-            b = a / 1.05;
-            User.deposit(b, 2); // wplata pieniedzy EUR
-            User.withdraw(a, 4); // wyplata pieniedzy CHF
+            option3 = option2 / 1.05;
+            User.deposit(option3, 2); // wplata pieniedzy EUR
+            User.withdraw(option2, 4); // wyplata pieniedzy CHF
         }
         if (firstChoice == '4' && secondChoice == '3')
         {
             firstCurrency = " Fr";
             secondCurrency = " $";
-            b = a / 0.99;
-            User.deposit(b, 3); // wplata pieniedzy USD
-            User.withdraw(a, 4); // wyplata pieniedzy CHF
+            option3 = option2 / 0.99;
+            User.deposit(option3, 3); // wplata pieniedzy USD
+            User.withdraw(option2, 4); // wyplata pieniedzy CHF
         }
         if (firstChoice == '4' && secondChoice == '5')
         {
             firstCurrency = " Fr";
             secondCurrency = " L";
-            b = a / 1.24;
-            User.deposit(b, 5); // wplata pieniedzy GBP
-            User.withdraw(a, 4); // wyplata pieniedzy CHF
+            option3 = option2 / 1.24;
+            User.deposit(option3, 5); // wplata pieniedzy GBP
+            User.withdraw(option2, 4); // wyplata pieniedzy CHF
         }
-        std::cout << "Zamieniles " << a << firstCurrency << " na " << b << secondCurrency << ".";
+        std::cout << "Zamieniles " << option2 << firstCurrency << " na " << option3 << secondCurrency << ".";
     }
     else
     {
@@ -590,41 +588,41 @@ void Bank::changeCHF() //zamiana CHF-->x, liczba z przecinkiem to kurs waluty x-
 
 void Bank::changeGBP() //zamiana GBP-->x, liczba z przecinkiem to kurs waluty x-->GBP
 {
-    if (a <= User.GBP)
+    if (option2 <= User.GBP)
     {
         if (firstChoice == '5' && secondChoice == '1')
         {
             firstCurrency = " L";
             secondCurrency = " Zl";
-            b = a / 0.18;
-            User.deposit(b, 1); // wplata pieniedzy PLN
-            User.withdraw(a, 5); // wyplata pieniedzy GBP
+            option3 = option2 / 0.18;
+            User.deposit(option3, 1); // wplata pieniedzy PLN
+            User.withdraw(option2, 5); // wyplata pieniedzy GBP
         }
         if (firstChoice == '5' && secondChoice == '2')
         {
             firstCurrency = " L";
             secondCurrency = " Euro";
-            b = a / 0.84;
-            User.deposit(b, 2); // wplata pieniedzy EUR
-            User.withdraw(a, 5); // wyplata pieniedzy GBP
+            option3 = option2 / 0.84;
+            User.deposit(option3, 2); // wplata pieniedzy EUR
+            User.withdraw(option2, 5); // wyplata pieniedzy GBP
         }
         if (firstChoice == '5' && secondChoice == '3')
         {
             firstCurrency = " L";
             secondCurrency = " $";
-            b = a / 0.80;
-            User.deposit(b, 3); // wplata pieniedzy USD
-            User.withdraw(a, 5); // wyplata pieniedzy GBP
+            option3 = option2 / 0.80;
+            User.deposit(option3, 3); // wplata pieniedzy USD
+            User.withdraw(option2, 5); // wyplata pieniedzy GBP
         }
         if (firstChoice == '5' && secondChoice == '4')
         {
             firstCurrency = " L";
             secondCurrency = " Fr";
-            b = a / 0.81;
-            User.deposit(b, 4); // wplata pieniedzy CHF
-            User.withdraw(a, 5); // wyplata pieniedzy GBP
+            option3 = option2 / 0.81;
+            User.deposit(option3, 4); // wplata pieniedzy CHF
+            User.withdraw(option2, 5); // wyplata pieniedzy GBP
         }
-        std::cout << "Zamieniles " << a << firstCurrency << " na " << b << secondCurrency << "." << std::endl<< std::endl;
+        std::cout << "Zamieniles " << option2 << firstCurrency << " na " << option3 << secondCurrency << "." << std::endl<< std::endl;
     }
     else
     {
@@ -666,7 +664,7 @@ void Bank::foreignCurrency() // Konto Walutowe
         std::cout << "Podaj na jaka walute chcesz przelac pieniadze (1-5): ";
         std::cin >> secondChoice;
         std::cout <<std:: endl << "Podaj ilosc pieniedzy: ";
-        std::cin >> a;
+        std::cin >> option2;
         std::cout<<std::endl;
 
         // obsluga zamiany walut
