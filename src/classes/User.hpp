@@ -11,8 +11,8 @@ public:
     std::string getLineFromFile(const std::string username, short n);
     bool deposit(long double n, short currency);
     void read();
-    long double PLN = 0, EUR = 0, USD = 0, CHF = 0, GBP = 0, PLNkontowalutowe = 0;
-    long double SKARBONKA = 0;
+    long double PLN = 0, EUR = 0, USD = 0, CHF = 0, GBP = 0; //suma pieniedzy w poszczegolnych walutach
+    long double piggyAccount = 0; // suma pieniedzy w Skarbonce
     std::string name;
     bool RegisterUser(std::string username, std::string password);
     bool withdraw(long double n, short currency);

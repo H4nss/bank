@@ -26,17 +26,16 @@ public:
 
     void menuPiggyBank(); //Menu Skarbonki
     void piggyBank(); //Skarbonka
-    void choice (); // wybor opcji w menu Skarbonki
-    void anotherChoice(); // wybor opcji w menu Konta Walutowego
     void changePLN(); //zamiana z waluty PLN-->x
     void changeEUR(); //zamiana z waluty EUR-->x
     void changeUSD(); //zamiana z waluty USD-->x
     void changeCHF(); //zamiana z waluty CHF-->x
+    void changeGBP(); //zamiana z waluty GBP-->x
     void foreignCurrency(); //Konto Walutowe
     void menuForeignCurrency(); //Menu Konta Walutowego
 
-    char sign, firstSign;
-    double a = 0, b = 0;
+    char sign, firstSign; //zmienne odpowiadajace za opcje w Skarbonce i Koncie Walutowym
+    double a = 0, b = 0; //zmienne sluzace przy zamianie walut
     char firstChoice, secondChoice; //wybor walut do zamiany
     std::string firstCurrency, secondCurrency; //wyswietlanie nazw walut w opisach
 
