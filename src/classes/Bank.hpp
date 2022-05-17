@@ -23,7 +23,6 @@ public:
     void transferScreen();
     void successChange(long double money, long double change, short currency);
     void TransferListScreen();
-
     void menuPiggyBank(); //Menu Skarbonki
     void piggyBank(); //Skarbonka
     void changePLN(); //zamiana z waluty PLN-->x
