@@ -118,13 +118,11 @@ void Bank::mainBankScreen()
     case 4:
         system("cls");
         menuForeignCurrency();
-        anotherChoice();
         foreignCurrency();
         break;
     case 5:
         system("cls");
         menuPiggyBank();
-        choice();
         piggyBank();
         break;
     case 6:
@@ -266,9 +264,6 @@ void Bank::transferScreen()
         getch();
         mainBankScreen();
     }
-    //std::cout << "         1 PLN        2 EUR        3 USD        4 CHF        5 GBP\n\n";
-    //std::cout << "         Wybierz Walute: ";
-    //std::cin >> currency;
     std::cout << "         Podaj kwote: ";
     std::cin >> money;
     std::string CurrencyTab[] = {"PLN", "EUR", "USD", "CHF", "GBP"};
@@ -294,120 +289,113 @@ void Bank::TransferListScreen()
 }
 
 //Skarbonka---------------------------------------------------------------------------------------------------------------------------------
-    void Bank::choice()
-    {
-        std::cout << "Twoj wybor: ";
-        std::cin >> sign;
-    }
 
-    void Bank::menuPiggyBank()
+    void Bank::menuPiggyBank() //menu wyboru opcji Skarbonki
     {
         header();
         std::cout << "-----------------  Twoje pieniadze na Koncie Bankowym: | " << User.PLN << " zl |" << std::endl;
         std::cout << "|   Skarbonka   |" << std::endl;
-        std::cout << "-----------------  Twoje pieniadze w Skarbonce: | " << User.SKARBONKA << " zl | " << std::endl;
+        std::cout << "-----------------  Twoje pieniadze w Skarbonce: | " << User.piggyAccount << " zl | " << std::endl;
         std::cout << std::endl << "1. Wplata pieniedzy do Skarbonki" <<std:: endl;
         std::cout << "2. Wyplata pieniedzy ze Skarbonki" << std::endl;
         std::cout << "3. Pomoc" << std::endl;
         std::cout << "4. Powrot" <<std:: endl <<std:: endl;
+        std::cout << "Twoj wybor: ";
+        std::cin >> sign;
     }
 
-    void Bank::piggyBank()
+    void Bank::piggyBank() //Skarbonka
     {
-        double x = 0,t=0;
+        double option1 = 0; //zmienna sluzaca przy dodawaniu i odejmowaniu pieniedzy z PLN i Skarbonki
 
         switch (sign)
         {
-        case '1':
+        case '1': //wplata do Skarbonki
         {
             system("cls");
             header();
             std::cout << "-----------------  Twoje pieniadze na Koncie Bankowym: | " << User.PLN << " zl |" << std::endl;
             std::cout << "|   Skarbonka   |" << std::endl;
-            std::cout << "-----------------  Twoje pieniadze w Skarbonce: | " << User.SKARBONKA << " zl | " << std::endl;
+            std::cout << "-----------------  Twoje pieniadze w Skarbonce: | " << User.piggyAccount << " zl | " << std::endl;
             std::cout << std::endl << "Twoje pieniadze, ktore wyplacisz ze swojego Konta Bankowego, beda istnialy w twojej Skarbonce. " << std::endl;
             std::cout << "Podaj ilosc pieniedzy w celu dodania ich do Skarbonki: ";
-            std::cin >> x;
+            std::cin >> option1;
+            std::cout<<std::endl;
             
-            system("cls");
-            if (x <= User.PLN)
+            if (option1 <= User.PLN)
             {   
-                User.deposit(x, 6);
-                User.withdraw(x, 1);
-                t = x;
+                User.deposit(option1, 6); // wplata pieniedzy do Skarbonki
+                User.withdraw(option1, 1); // wyplata pieniedzy PLN
                 
-                menuPiggyBank();
-                std::cout << "Wplaciles " << x << " zl do twojej Skarbonki." <<std:: endl << std::endl;
+                std::cout << "Wplaciles " << option1 << " zl do twojej Skarbonki.";
+                getch();
             }
             else
             {
-                system("cls");
-                menuPiggyBank();
-                std::cout << "Za malo pieniedzy na twoim Koncie Bankowym, aby wyplacic dana liczbe." << std::endl << std::endl;
+                std::cout << "Za malo pieniedzy na twoim Koncie Bankowym, aby wyplacic dana liczbe.";
+                getch();
             }
-            choice();
+            menuPiggyBank();
             piggyBank();
             break;
         }
-        case '2':
+        case '2': //wyplata ze Skarbonki
         {
             system("cls");
             header();
             std::cout << "-----------------  Twoje pieniadze na Koncie Bankowym: | " << User.PLN << " zl |" << std::endl;
             std::cout << "|   Skarbonka   |" << std::endl;
-            std::cout << "-----------------  Twoje pieniadze w Skarbonce: | " << User.SKARBONKA << " zl | " << std::endl;
-            std::cout << std::endl << "Twoje pieniadze, ktore przewalutujesz ze swojej Skarbonki, beda istnialy na twoim Koncie Bankowym. " << std::endl;
+            std::cout << "-----------------  Twoje pieniadze w Skarbonce: | " << User.piggyAccount << " zl | " << std::endl;
+            std::cout << std::endl << "Twoje pieniadze, ktore wyplacisz ze swojej Skarbonki, beda istnialy na twoim Koncie Bankowym. " << std::endl;
             std::cout << "Podaj ilosc pieniedzy w celu dodania ich do twojego Konta Bankowego: ";
-            std::cin >> x;
-            system("cls");
-            if (x <= User.SKARBONKA)
+            std::cin >> option1;
+            std::cout<<std::endl;
+
+            if (option1 <= User.piggyAccount)
             {
-                User.deposit(x, 1);
-                User.withdraw(x, 6);
-                t = x;
-                menuPiggyBank();
-                std::cout << "Wyplaciles " << x << " zl ze swojej Skarbonki." << std::endl << std::endl;
+                User.deposit(option1, 1); // wplata pieniedzy PLN
+                User.withdraw(option1, 6); // wyplata pieniedzy ze Skarbonki
+                std::cout << "Wyplaciles " << option1 << " zl ze swojej Skarbonki.";
+                getch();
             }
             else
             {
-                system("cls");
-                menuPiggyBank();
-                std::cout << "Za malo pieniedzy w twojej Skarbonce, aby wyplacic dana liczbe pieniedzy." <<std:: endl << std::endl;
+                std::cout << "Za malo pieniedzy w twojej Skarbonce, aby wyplacic dana liczbe pieniedzy.";
+                getch();
             }
-            choice();
+            menuPiggyBank();
             piggyBank();
             break;
         }
-        case '3':
+        case '3': //pomoc do programu Skarbonka
         {
-            system("cls");
             header();
             std::cout << "-----------------  Twoje pieniadze na Koncie Bankowym: | " << User.PLN << " zl |" << std::endl;
             std::cout << "|   Skarbonka   |" << std::endl;
-            std::cout << "-----------------  Twoje pieniadze w Skarbonce: | " << User.SKARBONKA << " zl | " << std::endl;
+            std::cout << "-----------------  Twoje pieniadze w Skarbonce: | " << User.piggyAccount << " zl | " << std::endl;
             std::cout<<std::endl<<"Skarbonka to program, ktory umozliwia odlozenie swoich pieniedzy w bezpieczne miejsce. Aby wplacic pieniadze do Skarbonki,"<<std::endl;
             std::cout<<"musisz przelac je ze swojego Konta Bankowego, wybierajac opcje nr 1 w menu Skarbonki. Pieniadze, ktore znajduja sie w Skarbonce, "<<std::endl;
             std::cout<<"mozesz wyplacic w kazdym momencie, wybierajac opcje nr 2 w menu Skarbonki. Mozesz wyjsc ze Skarbonki, korzystajac z opcji nr 3 w Menu Skarbonki."<<std::endl;
             std::cout<<std::endl<<"Aby wyjsc z opcji Pomoc, nacisnij dowolny klawisz.";
             getch();
-            system("cls");
             menuPiggyBank();
-            choice();
             piggyBank();
             break;
         }
-        case '4':
+        case '4': //Powrot
         {
-            system("cls");
             mainBankScreen();
             break;
         }
-        default:
+        default: //jesli ktos wpisze zla opcje
         {
-            system("cls");
+            header();
+            std::cout << "-----------------  Twoje pieniadze na Koncie Bankowym: | " << User.PLN << " zl |" << std::endl;
+            std::cout << "|   Skarbonka   |" << std::endl;
+            std::cout << "-----------------  Twoje pieniadze w Skarbonce: | " << User.piggyAccount << " zl | "<< std::endl << std::endl;
+            std::cout << "Zly wybor opcji, Sprobuj ponownie." << std::endl << std::endl;
+            getch();
             menuPiggyBank();
-            std::cout << "Zly wybor opcji, Podaj twoj wybor ponownie." << std::endl << std::endl;
-            choice();
             piggyBank();
             break;
         }
@@ -418,342 +406,334 @@ void Bank::TransferListScreen()
 //Konto Walutowe.....................................................................................................................
 
 
-void Bank::anotherChoice()
-    {
-        std::cout << "Twoj wybor: ";
-        std::cin >> firstSign;
-    }
-void Bank::changePLN() //zamiana PLN-->a
+void Bank::changePLN() //zamiana PLN-->x, liczba z przecinkiem to kurs waluty x-->PLN
 {
-    if (a <= User.PLNkontowalutowe)
+    if (option2 <= User.PLN)
     {
         if (firstChoice == '1' && secondChoice == '2')
         {
             firstCurrency = " Zl";
             secondCurrency = " Euro";
-            b = a / 4.72;
-            User.deposit(b, 3);
-            User.withdraw(a, 2);
+            option3 = option2 / 4.65;
+            User.deposit(option3, 2); // wplata pieniedzy EUR
+            User.withdraw(option2, 1); // wyplata pieniedzy PLN
         }
         if (firstChoice == '1' && secondChoice == '3')
         {
             firstCurrency = " Zl";
             secondCurrency = " $";
-            b = a / 4.27;
-            User.deposit(b, 4);
-            User.withdraw(a, 2);
+            option3 = option2 / 4.42;
+            User.deposit(option3, 3); // wplata pieniedzy USD
+            User.withdraw(option2, 1); // wyplata pieniedzy PLN
         }
         if (firstChoice == '1' && secondChoice == '4')
         {
             firstCurrency = " Zl";
             secondCurrency = " Fr";
-            b = a / 4.57;
-            User.deposit(b, 5);
-            User.withdraw(a, 2);
+            option3 = option2 / 4.44;
+            User.deposit(option3, 4); // wplata pieniedzy CHF
+            User.withdraw(option2, 1); // wyplata pieniedzy PLN
         }
-        menuForeignCurrency();
-        std::cout << "Zamieniles " << a << firstCurrency << " na " << b << secondCurrency << "." << std::endl;
-        std::cout << "Jednoczesnie wplaciles " << b << secondCurrency << " do twojego Konta Walutowego." << std::endl << std::endl;
-        anotherChoice();
+        if (firstChoice == '1' && secondChoice == '5')
+        {
+            firstCurrency = " Zl";
+            secondCurrency = " L";
+            option3 = option2 / 5.52;
+            User.deposit(option3, 5); // wplata pieniedzy GBP
+            User.withdraw(option2, 1); // wyplata pieniedzy PLN
+        }
+        std::cout << "Zamieniles " << option2 << firstCurrency << " na " << option3 << secondCurrency << ".";
     }
     else
     {
-        system("cls");
-        menuForeignCurrency();
-        std::cout << "Za malo pieniedzy na twoim Koncie Bankowym, aby wyplacic dana liczbe." << std::endl << std::endl;
-        anotherChoice();
+        std::cout << "Za malo pieniedzy na twoim Koncie Bankowym, aby wyplacic dana liczbe.";
     }
+    getch();
 }
 
-void Bank::changeEUR() //zamiana EUR-->a
+void Bank::changeEUR() //zamiana EUR-->x, liczba z przecinkiem to kurs waluty x-->EUR
 {
-    if (a <= User.EUR)
+    if (option2 <= User.EUR)
     {
         if (firstChoice == '2' && secondChoice == '1')
         {
             firstCurrency = " Euro";
             secondCurrency = " Zl";
-            b = a / 0.21;
-            User.deposit(b, 2);
-            User.withdraw(a, 3);
+            option3 = option2 / 0.21;
+            User.deposit(option3, 1); // wplata pieniedzy PLN
+            User.withdraw(option2, 2); // wyplata pieniedzy EUR
         }
         if (firstChoice == '2' && secondChoice == '3')
         {
             firstCurrency = " Euro";
             secondCurrency = " $";
-            b = a / 0.90;
-            User.deposit(b, 4);
-            User.withdraw(a, 3);
+            option3 = option2 / 0.95;
+            User.deposit(option3, 3); // wplata pieniedzy USD
+            User.withdraw(option2, 2); // wyplata pieniedzy EUR
         }
         if (firstChoice == '2' && secondChoice == '4')
         {
             firstCurrency = " Euro";
             secondCurrency = " Fr";
-            b = a / 0.97;
-            User.deposit(b, 5);
-            User.withdraw(a, 3);
+            option3 = option2 / 0.95;
+            User.deposit(option3, 4); // wplata pieniedzy CHF
+            User.withdraw(option2, 2); // wyplata pieniedzy EUR
         }
-        menuForeignCurrency();
-        std::cout << "Zamieniles " << a << firstCurrency << " na " << b << secondCurrency << "." <<std:: endl;
-        std::cout << "Jednoczesnie wplaciles " << b << secondCurrency << " do twojego Konta Walutowego." << std::endl <<std:: endl;
-        anotherChoice();
+        if (firstChoice == '2' && secondChoice == '5')
+        {
+            firstCurrency = " Euro";
+            secondCurrency = " L";
+            option3 = option2 / 1.18;
+            User.deposit(option3, 5); // wplata pieniedzy GBP
+            User.withdraw(option2, 2); // wyplata pieniedzy EUR
+        }
+        std::cout << "Zamieniles " << option2 << firstCurrency << " na " << option3 << secondCurrency << ".";
     }
     else
     {
-        system("cls");
-        menuForeignCurrency();
-        std::cout << "Za malo pieniedzy na twoim Koncie Bankowym, aby wyplacic dana liczbe." << std::endl << std::endl;
-        anotherChoice();
+        std::cout << "Za malo pieniedzy na twoim Koncie Bankowym, aby wyplacic dana liczbe.";
     }
+    getch();
 }
 
-void Bank::changeUSD() //zamiana USD-->a
+void Bank::changeUSD() //zamiana USD-->x, liczba z przecinkiem to kurs waluty x-->USD
 {
-    if (a <= User.USD)
+    if (option2 <= User.USD)
     {
         if (firstChoice == '3' && secondChoice == '1')
         {
             firstCurrency = " $";
             secondCurrency = " Zl";
-            b = a / 0.23;
-            User.deposit(b, 2);
-            User.withdraw(a, 4);
+            option3 = option2 / 0.23;
+            User.deposit(option3, 1); // wplata pieniedzy PLN
+            User.withdraw(option2, 3); // wyplata pieniedzy USD
         }
         if (firstChoice == '3' && secondChoice == '2')
         {
             firstCurrency = " $";
             secondCurrency = " Euro";
-            b = a / 1.11;
-            User.deposit(b, 3);
-            User.withdraw(a, 4);
+            option3= option2 / 1.05;
+            User.deposit(option3, 2); // wplata pieniedzy EUR
+            User.withdraw(option2, 3); // wyplata pieniedzy USD
         }
         if (firstChoice == '3' && secondChoice == '4')
         {
             firstCurrency = " $";
             secondCurrency = " Fr";
-            b = a / 1.07;
-            User.deposit(b, 5);
-            User.withdraw(a, 4);
+            option3 = option2 / 1.01;
+            User.deposit(option3, 4); // wplata pieniedzy CHF
+            User.withdraw(option2, 3); // wyplata pieniedzy USD
         }
-        menuForeignCurrency();
-        std::cout << "Zamieniles " << a << firstCurrency << " na " << b << secondCurrency << "." << std::endl;
-        std::cout << "Jednoczesnie wplaciles " << b << secondCurrency << " do twojego Konta Walutowego." << std::endl <<std:: endl;
-        anotherChoice();
+        if (firstChoice == '3' && secondChoice == '5')
+        {
+            firstCurrency = " $";
+            secondCurrency = " L";
+            option3 = option2 / 1.25;
+            User.deposit(option3, 5); // wplata pieniedzy GBP
+            User.withdraw(option2, 3); // wyplata pieniedzy USD
+        }
+        std::cout << "Zamieniles " << option2 << firstCurrency << " na " << option3 << secondCurrency << "."<< std::endl << std::endl;
     }
     else
     {
-        system("cls");
-        menuForeignCurrency();
-        std::cout << "Za malo pieniedzy na twoim Koncie Bankowym, aby wyplacic dana liczbe." << std::endl << std::endl;
-        anotherChoice();
+        std::cout << "Za malo pieniedzy na twoim Koncie Bankowym, aby wyplacic dana liczbe.";
     }
+    getch();
 }
 
-void Bank::changeCHF() //zamiana CHF-->a
+void Bank::changeCHF() //zamiana CHF-->x, liczba z przecinkiem to kurs waluty x-->CHF
 {
-    if (a <= User.CHF)
+    if (option2 <= User.CHF)
     {
         if (firstChoice == '4' && secondChoice == '1')
         {
             firstCurrency = " Fr";
             secondCurrency = " Zl";
-            b = a / 0.22;
-            User.deposit(b, 2);
-            User.withdraw(a, 5);
+            option3 = option2 / 0.23;
+            User.deposit(option3, 1); // wplata pieniedzy PLN
+            User.withdraw(option2, 4); // wyplata pieniedzy CHF
         }
         if (firstChoice == '4' && secondChoice == '2')
         {
             firstCurrency = " Fr";
             secondCurrency = " Euro";
-            b = a / 1.03;
-            User.deposit(b, 3);
-            User.withdraw(a, 5);
+            option3 = option2 / 1.05;
+            User.deposit(option3, 2); // wplata pieniedzy EUR
+            User.withdraw(option2, 4); // wyplata pieniedzy CHF
         }
         if (firstChoice == '4' && secondChoice == '3')
         {
             firstCurrency = " Fr";
             secondCurrency = " $";
-            b = a / 0.93;
-            User.deposit(b, 4);
-            User.withdraw(a, 5);
+            option3 = option2 / 0.99;
+            User.deposit(option3, 3); // wplata pieniedzy USD
+            User.withdraw(option2, 4); // wyplata pieniedzy CHF
         }
-        menuForeignCurrency();
-        std::cout << "Zamieniles " << a << firstCurrency << " na " << b << secondCurrency << "." << std::endl;
-        std::cout << "Jednoczesnie wplaciles " << b << secondCurrency << " do twojego Konta Walutowego." << std::endl << std::endl;
-        anotherChoice();
+        if (firstChoice == '4' && secondChoice == '5')
+        {
+            firstCurrency = " Fr";
+            secondCurrency = " L";
+            option3 = option2 / 1.24;
+            User.deposit(option3, 5); // wplata pieniedzy GBP
+            User.withdraw(option2, 4); // wyplata pieniedzy CHF
+        }
+        std::cout << "Zamieniles " << option2 << firstCurrency << " na " << option3 << secondCurrency << ".";
     }
     else
     {
-        system("cls");
-        menuForeignCurrency();
-        std::cout << "Za malo pieniedzy na twoim Koncie Bankowym, aby wyplacic dana liczbe." << std::endl << std::endl;
-        anotherChoice();
+        std::cout << "Za malo pieniedzy na twoim Koncie Bankowym, aby wyplacic dana liczbe.";
     }
+    getch();
 }
 
-void Bank::menuForeignCurrency()
+void Bank::changeGBP() //zamiana GBP-->x, liczba z przecinkiem to kurs waluty x-->GBP
+{
+    if (option2 <= User.GBP)
+    {
+        if (firstChoice == '5' && secondChoice == '1')
+        {
+            firstCurrency = " L";
+            secondCurrency = " Zl";
+            option3 = option2 / 0.18;
+            User.deposit(option3, 1); // wplata pieniedzy PLN
+            User.withdraw(option2, 5); // wyplata pieniedzy GBP
+        }
+        if (firstChoice == '5' && secondChoice == '2')
+        {
+            firstCurrency = " L";
+            secondCurrency = " Euro";
+            option3 = option2 / 0.84;
+            User.deposit(option3, 2); // wplata pieniedzy EUR
+            User.withdraw(option2, 5); // wyplata pieniedzy GBP
+        }
+        if (firstChoice == '5' && secondChoice == '3')
+        {
+            firstCurrency = " L";
+            secondCurrency = " $";
+            option3 = option2 / 0.80;
+            User.deposit(option3, 3); // wplata pieniedzy USD
+            User.withdraw(option2, 5); // wyplata pieniedzy GBP
+        }
+        if (firstChoice == '5' && secondChoice == '4')
+        {
+            firstCurrency = " L";
+            secondCurrency = " Fr";
+            option3 = option2 / 0.81;
+            User.deposit(option3, 4); // wplata pieniedzy CHF
+            User.withdraw(option2, 5); // wyplata pieniedzy GBP
+        }
+        std::cout << "Zamieniles " << option2 << firstCurrency << " na " << option3 << secondCurrency << "." << std::endl<< std::endl;
+    }
+    else
+    {
+        std::cout << "Za malo pieniedzy na twoim Koncie Bankowym, aby wyplacic dana liczbe." << std::endl << std::endl;
+    }
+    getch();
+}
+
+void Bank::menuForeignCurrency() // menu wyboru opcji Konta Walutowego
 {
     header();
-    std::cout << "----------------------  Twoje pieniadze na Koncie Bankowym: | " << User.PLN << " zl |" <<std:: endl;
+    std::cout << "----------------------  Twoje pieniadze na Koncie Bankowym: | PLN: " << User.PLN << " zl |" <<std:: endl;
     std::cout << "|   Konto Walutowe   |" << std::endl;
-    std::cout << "----------------------  Twoje pieniadze na Koncie Walutowym: | PLN: " << User.PLNkontowalutowe << " Zl | EUR: " << User.EUR << " Euro | USD: " << User.USD << " $ | CHF: " << User.CHF << " Fr |" << std::endl;
-    std::cout << std::endl << "1. Wplata pieniedzy do Konta Walutowego" <<std:: endl;
-    std::cout << "2. Wyplata pieniedzy z Konta Walutowego" << std::endl;
-    std::cout << "3. Zamiana walut" <<std:: endl;
-    std::cout << "4. Pomoc" << std::endl;
-    std::cout << "5. Powrot" << std::endl << std::endl;
+    std::cout << "----------------------  Twoje pieniadze na Koncie Walutowym: | EUR: " << User.EUR << " Euro | USD: " << User.USD << " $ | CHF: " << User.CHF << " Fr | GBP: "<<User.GBP<<" L |" << std::endl<< std::endl;
+    std::cout << "1. Zamiana walut" <<std:: endl;
+    std::cout << "2. Pomoc" << std::endl;
+    std::cout << "3. Powrot" << std::endl << std::endl;
+    std::cout << "Twoj wybor: ";
+    std::cin >> firstSign;
 }
 
-void Bank::foreignCurrency()
+void Bank::foreignCurrency() // Konto Walutowe
 {
     switch (firstSign)
     {
-    case '1':
+    case '1': // Zamiana walut
     {
-        system("cls");
         header();
-        std::cout << "----------------------  Twoje pieniadze na Koncie Bankowym: | " << User.PLN << " zl |" << std::endl;
-        std::cout << "|   Konto Walutowe   |" << std::endl;
-        std::cout << "----------------------  Twoje pieniadze na Koncie Walutowym: | PLN: " << User.PLNkontowalutowe << " Zl | EUR: " << User.EUR << " Euro | USD: " << User.USD << " $ | CHF: " << User.CHF << " Fr |" <<std:: endl;
-        std::cout << std::endl << "Twoje pieniadze, ktore wyplacisz ze swojego Konta Bankowego, beda istnialy na twoim Koncie Walutowym. " << std::endl;
-        std::cout << "Podaj ilosc pieniedzy w zl: ";
-        std::cin >> a;
-        system("cls");
-        if (a <= User.PLN)
-        {
-            b = a;
-            User.deposit(a, 2);
-            User.withdraw(a, 1);
-            menuForeignCurrency();
-            std::cout << "Wplaciles " << a << " zl do twojego Konta Walutowego." <<std:: endl << std::endl;
-            anotherChoice();
-        }
-        else
-        {
-            system("cls");
-            menuForeignCurrency();
-            std::cout << "Za malo pieniedzy na twoim Koncie Bankowym, aby wyplacic dana liczbe." << std::endl << std::endl;
-            anotherChoice();
-        }
-        foreignCurrency();
-        break;
-    }
-    case '2':
-    {
-        system("cls");
-        header();
-        std::cout << "----------------------  Twoje pieniadze na Koncie Bankowym: | " << User.PLN << " zl |" << std::endl;
-        std::cout << "|   Konto Walutowe   |" << std::endl;
-        std::cout << "----------------------  Twoje pieniadze na Koncie Walutowym: | PLN: " << User.PLNkontowalutowe << " Zl | EUR: " << User.EUR << " Euro | USD: " << User.USD << " $ | CHF: " << User.CHF << " Fr |" <<std:: endl;
-        std::cout << std::endl << "Twoje pieniadze, ktore wyplacisz ze swojego Konta Walutowego, beda istnialy na twoim Koncie Bankowym. " << std::endl;
-        std::cout << "Podaj ilosc pieniedzy w zl: ";
-        std::cin >> a;
-        system("cls");
-        if (a <= User.PLNkontowalutowe)
-        {
-            b = a;
-            User.deposit(a, 1);
-            User.withdraw(a, 2);
-            menuForeignCurrency();
-            std::cout << "Wyplaciles " << b << " zl ze swojego Konta Walutowego." << std::endl << std::endl;
-            anotherChoice();
-        }
-        else
-        {
-            system("cls");
-            menuForeignCurrency();
-            std::cout << "Za malo pieniedzy na twoim Koncie Walutowym, aby wyplacic dana liczbe pieniedzy." << std::endl << std::endl;
-            anotherChoice();
-        }
-        foreignCurrency();
-        break;
-    }
-
-    case '3':
-    {
-        system("cls");
-        header();
-        std::cout << "----------------------  Twoje pieniadze na Koncie Bankowym: | " << User.PLN << " zl |" << std::endl;
+        std::cout << "----------------------  Twoje pieniadze na Koncie Bankowym: | PLN: " << User.PLN << " zl |" << std::endl;
         std::cout << "|   Konto Walutowe   |" <<std:: endl;
-        std::cout << "----------------------  Twoje pieniadze na Koncie Walutowym: | PLN: " << User.PLNkontowalutowe << " Zl | EUR: " << User.EUR << " Euro | USD: " << User.USD << " $ | CHF: " << User.CHF << " Fr |" << std::endl;
-        std::cout << std::endl << "1. PLN" << std::endl;
+        std::cout << "----------------------  Twoje pieniadze na Koncie Walutowym: | EUR: " << User.EUR << " Euro | USD: " << User.USD << " $ | CHF: " << User.CHF << " Fr | GBP: "<<User.GBP<<" L |" << std::endl<< std::endl;
+        std::cout << "1. PLN" << std::endl;
         std::cout << "2. EUR" << std::endl;
         std::cout << "3. USD" << std::endl;
-        std::cout << "4. CHF" <<std:: endl <<std:: endl;
-        std::cout << "Podaj z jakiej waluty chcesz przelac pieniadze (1-4): ";
+        std::cout << "4. CHF" << std::endl;
+        std::cout << "5. GBP" << std::endl <<std:: endl;
+        std::cout << "Podaj z jakiej waluty chcesz przelac pieniadze (1-5): ";
         std::cin >> firstChoice;
-        std::cout << "Podaj na jaka walute chcesz przelac pieniadze (1-4): ";
+        std::cout << "Podaj na jaka walute chcesz przelac pieniadze (1-5): ";
         std::cin >> secondChoice;
         std::cout <<std:: endl << "Podaj ilosc pieniedzy: ";
-        std::cin >> a;
+        std::cin >> option2;
+        std::cout<<std::endl;
 
-        system("cls");
+        // obsluga zamiany walut
 
-        if ((firstChoice == '1' && secondChoice == '2') || (firstChoice == '1' && secondChoice == '3') || (firstChoice == '1' && secondChoice == '4'))
+        if ((firstChoice == '1' && secondChoice == '2') || (firstChoice == '1' && secondChoice == '3') || (firstChoice == '1' && secondChoice == '4') || (firstChoice == '1' && secondChoice == '5'))
         {
             changePLN();
         }
 
-        else if ((firstChoice == '2' && secondChoice == '1') || (firstChoice == '2' && secondChoice == '3') || (firstChoice == '2' && secondChoice == '4'))
+        else if ((firstChoice == '2' && secondChoice == '1') || (firstChoice == '2' && secondChoice == '3') || (firstChoice == '2' && secondChoice == '4') || (firstChoice == '2' && secondChoice == '5'))
         {
             changeEUR();
         }
 
-        else if ((firstChoice == '3' && secondChoice == '1') || (firstChoice == '3' && secondChoice == '2') || (firstChoice == '3' && secondChoice == '4'))
+        else if ((firstChoice == '3' && secondChoice == '1') || (firstChoice == '3' && secondChoice == '2') || (firstChoice == '3' && secondChoice == '4') || (firstChoice == '3' && secondChoice == '5'))
         {
             changeUSD();
         }
 
-        else if ((firstChoice == '4' && secondChoice == '1') || (firstChoice == '4' && secondChoice == '2') || (firstChoice == '4' && secondChoice == '3'))
+        else if ((firstChoice == '4' && secondChoice == '1') || (firstChoice == '4' && secondChoice == '2') || (firstChoice == '4' && secondChoice == '3') || (firstChoice == '4' && secondChoice == '5'))
         {
             changeCHF();
         }
 
-        else
+        else if ((firstChoice == '5' && secondChoice == '1') || (firstChoice == '5' && secondChoice == '2') || (firstChoice == '5' && secondChoice == '3') || (firstChoice == '5' && secondChoice == '4'))
         {
-            system("cls");
-            menuForeignCurrency();
-            std::cout << "Zly wybor opcji, Podaj twoj wybor ponownie." << std::endl << std::endl;
-            anotherChoice();
-            foreignCurrency();
+            changeGBP();
         }
 
-        foreignCurrency();
-        break;
-    }
-    case '4':
-    {
-        system("cls");
-        header();
-        std::cout << "----------------------  Twoje pieniadze na Koncie Bankowym: | " << User.PLN << " zl |" << std::endl;
-        std::cout << "|   Konto Walutowe   |" << std::endl;
-        std::cout << "----------------------  Twoje pieniadze na Koncie Walutowym: | PLN: " << User.PLNkontowalutowe << " Zl | EUR: " << User.EUR << " Euro | USD: " << User.USD << " $ | CHF: " << User.CHF << " Fr |" << std::endl;
-        std::cout << std::endl << "Konto Walutowe to program, ktory umozliwia zamiane roznych walut i przechowywanie ich na swoim Koncie Walutowym." << std::endl;
-        std::cout << "Aby wplacic pieniadze do Konta Walutowego, musisz przelac je ze swojego Konta Bankowego, wybierajac opcje nr 1 w menu Konta Walutowego." << std::endl;
-        std::cout << "Pieniadze, ktore znajduja sie na Koncie Walutowym mozesz wyplacic w kazdym momencie, wybierajac opcje nr 2 w menu Konta Walutowego." << std::endl;
-        std::cout << "Aby przelew pomiedzy Kontem Bankowym, a Kontem Walutowym doszedl do skutku, musisz korzystac z waluty PLN. Korzystajac z" << std::endl;
-        std::cout << "opcji nr 3 w menu Konta Bankowego, mozesz przewalutowac swoje pieniadze. Musisz tylko podac walute, z ktorej chcesz przewalutowac swoje pieniadze, " << std::endl;
-        std::cout << "walute docelowa oraz ilosc pieniedzy do przewalutowania. Mozesz wyjsc z Konta Walutowego, korzystajac z opcji nr 5 w Menu Konta Wallutowego." << std::endl;
-        std::cout << std::endl << "Aby wyjsc z opcji Pomoc, nacisnij dowolny klawisz.";
-        getch();
-        system("cls");
+        else
+        {
+            std::cout << "Wybrano zla opcje." << std::endl << std::endl;
+            getch();
+        }
+
         menuForeignCurrency();
-        anotherChoice();
         foreignCurrency();
         break;
     }
-    case '5':
+    case '2': // pomoc Konta Walutowego
     {
-        system("cls");
+        header();
+        std::cout << "----------------------  Twoje pieniadze na Koncie Bankowym: | PLN: " << User.PLN << " zl |" << std::endl;
+        std::cout << "|   Konto Walutowe   |" << std::endl;
+        std::cout << "----------------------  Twoje pieniadze na Koncie Walutowym: | EUR: " << User.EUR << " Euro | USD: " << User.USD << " $ | CHF: " << User.CHF << " Fr | GBP: "<<User.GBP<<" L |" << std::endl<< std::endl;
+        std::cout << "Konto Walutowe to program, ktory umozliwia zamiane roznych walut i przechowywanie ich na swoim Koncie Walutowym." << std::endl;
+        std::cout << "Korzystajac z opcji nr 3 w menu Konta Bankowego, mozesz przewalutowac swoje pieniadze. Musisz tylko podac walute, z ktorej chcesz" << std::endl;
+        std::cout << "przewalutowac swoje pieniadze, walute docelowa oraz ilosc pieniedzy do przewalutowania. Mozesz wyjsc z Konta Walutowego, " << std::endl;
+        std::cout << "korzystajac z opcji nr 5 w Menu Konta Wallutowego."<< std::endl << std::endl;
+        std::cout<<"Aby wyjsc z opcji Pomoc, nacisnij dowolny klawisz."<<std::endl;
+        getch();
+        menuForeignCurrency();
+        foreignCurrency();
+        break;
+    }
+    case '3': // Powrot
+    {
         mainBankScreen();
         break;
     }
-    default:
+    default: // Zly wybor opcji
     {
-        system("cls");
+        header();
+        std::cout << "----------------------  Twoje pieniadze na Koncie Bankowym: | PLN: " << User.PLN << " zl |" << std::endl;
+        std::cout << "|   Konto Walutowe   |" <<std:: endl;
+        std::cout << "----------------------  Twoje pieniadze na Koncie Walutowym: | EUR: " << User.EUR << " Euro | USD: " << User.USD << " $ | CHF: " << User.CHF << " Fr | GBP: "<<User.GBP<<" L |" << std::endl<< std::endl;
+        std::cout << "Zly wybor opcji, Sprobuj ponownie.";
+        getch();
         menuForeignCurrency();
-        std::cout << "Zly wybor opcji, Podaj twoj wybor ponownie." << std::endl << std::endl;
-        anotherChoice();
         foreignCurrency();
         break;
     }

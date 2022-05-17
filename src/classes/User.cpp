@@ -8,11 +8,11 @@ bool User::doesUserExist(std::string username, std::string password)
     {
         name = username;
         PLN = stold(getLineFromFile(username, 1));
-        PLNkontowalutowe = stold(getLineFromFile(name, 2));
-        EUR = stold(getLineFromFile(username, 3));
-        USD = stold(getLineFromFile(username, 4));
-        CHF = stold(getLineFromFile(username, 5));
-        SKARBONKA = stold(getLineFromFile(username, 6));
+        EUR = stold(getLineFromFile(username, 2));
+        USD = stold(getLineFromFile(username, 3));
+        CHF = stold(getLineFromFile(username, 4));
+        GBP = stold(getLineFromFile(username, 5));
+        piggyAccount = stold(getLineFromFile(username, 6));
         return 1;
     }
     return 0;
@@ -62,11 +62,11 @@ bool User::deposit(long double n, short currency)
     remove(path.c_str());
     rename("data\\buffer.dat", path.c_str());
     PLN = stold(getLineFromFile(name, 1));
-    PLNkontowalutowe = stold(getLineFromFile(name, 2));
-    EUR = stold(getLineFromFile(name, 3));
-    USD = stold(getLineFromFile(name, 4));
-    CHF = stold(getLineFromFile(name, 5));
-    SKARBONKA = stold(getLineFromFile(name, 6));
+    EUR = stold(getLineFromFile(name, 2));
+    USD = stold(getLineFromFile(name, 3));
+    CHF = stold(getLineFromFile(name, 4));
+    GBP = stold(getLineFromFile(name, 5));
+    piggyAccount = stold(getLineFromFile(name, 6));
 
     return 0;
 }
@@ -132,11 +132,11 @@ bool User::withdraw(long double n, short currency)
     remove(path.c_str());
     rename("data\\buffer.dat", path.c_str());
     PLN = stold(getLineFromFile(name, 1));
-    PLNkontowalutowe = stold(getLineFromFile(name, 2));
-    EUR = stold(getLineFromFile(name, 3));
-    USD = stold(getLineFromFile(name, 4));
-    CHF = stold(getLineFromFile(name, 5));
-    SKARBONKA = stold(getLineFromFile(name, 6));
+    EUR = stold(getLineFromFile(name, 2));
+    USD = stold(getLineFromFile(name, 3));
+    CHF = stold(getLineFromFile(name, 4));
+    GBP = stold(getLineFromFile(name, 5));
+    piggyAccount = stold(getLineFromFile(name, 6));
     return 1;
 }
 
