@@ -1,5 +1,6 @@
 #ifndef USER_HPP
 #define USER_HPP
+
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -11,8 +12,8 @@ public:
     std::string getLineFromFile(const std::string username, short n);
     bool deposit(long double n, short currency);
     void read();
-    long double PLN = 0, EUR = 0, USD = 0, CHF = 0, GBP = 0; //suma pieniedzy w poszczegolnych walutach
-    long double piggyAccount = 0; // suma pieniedzy w Skarbonce
+    long double PLN = 0, EUR = 0, USD = 0, CHF = 0, GBP = 0; // suma pieniedzy w poszczegolnych walutach
+    long double piggyAccount = 0;                            // suma pieniedzy w Skarbonce
     std::string name;
     bool RegisterUser(std::string username, std::string password);
     bool withdraw(long double n, short currency);
@@ -20,8 +21,6 @@ public:
     short Transfer(long double n, short currency, std::string username);
     bool raportTransfer(long double n, short currency, std::string username);
     void raportTransferRead();
-
-private:
 };
 
 #endif

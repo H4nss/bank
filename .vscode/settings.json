@@ -4,7 +4,7 @@
   "code-runner.clearPreviousOutput": true,
   "code-runner.executorMap": {
     // po nazwie ( $fileName ) powinny byc wszystkie sciezki do plikow, ktore importujemy w main.cpp
-    //"cpp": "cd $dir && g++ $fileName classes/User/User.cpp classes/Interface.cpp classes/Authorization.cpp classes/Balanceuser.cpp classes/Database.cpp -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
+    // "cpp": "cd $dir && g++ $fileName classes/User.cpp classes/Bank.cpp -o $fileNameWithoutExt && $dir$fileNameWithoutExt"
   },
   "files.associations": {
     "chrono": "cpp",
