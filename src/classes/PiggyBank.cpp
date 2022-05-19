@@ -95,7 +95,7 @@ void PiggyBank::displayOptions() // Skarbonka
   }
   case '3': // pomoc do programu Skarbonka
   {
-    displayMenu();
+    displayInfo();
     std::cout << "Skarbonka to program, ktory umozliwia odlozenie swoich pieniedzy w bezpieczne miejsce. Aby wplacic pieniadze do Skarbonki," << std::endl;
     std::cout << "musisz przelac je ze swojego Konta Bankowego, wybierajac opcje nr 1 w menu Skarbonki. Pieniadze, ktore znajduja sie w Skarbonce, " << std::endl;
     std::cout << "mozesz wyplacic w kazdym momencie, wybierajac opcje nr 2 w menu Skarbonki. Mozesz wyjsc ze Skarbonki, korzystajac z opcji nr 3 w Menu Skarbonki." << std::endl;
