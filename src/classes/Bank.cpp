@@ -11,7 +11,7 @@ void Bank::changePLN(char firstChoice, char secondChoice) // zamiana PLN-->x, li
         {
             firstCurrency = " Zl";
             secondCurrency = " Euro";
-            converted = ammountToChange / 4.65;
+            converted = ammountToChange / 4.6372;
             User::deposit(converted, 2);        // wplata pieniedzy EUR
             User::withdraw(ammountToChange, 1); // wyplata pieniedzy PLN
         }
@@ -19,7 +19,7 @@ void Bank::changePLN(char firstChoice, char secondChoice) // zamiana PLN-->x, li
         {
             firstCurrency = " Zl";
             secondCurrency = " $";
-            converted = ammountToChange / 4.42;
+            converted = ammountToChange / 4.3835;
             User::deposit(converted, 3);        // wplata pieniedzy USD
             User::withdraw(ammountToChange, 1); // wyplata pieniedzy PLN
         }
@@ -27,7 +27,7 @@ void Bank::changePLN(char firstChoice, char secondChoice) // zamiana PLN-->x, li
         {
             firstCurrency = " Zl";
             secondCurrency = " Fr";
-            converted = ammountToChange / 4.44;
+            converted = ammountToChange / 4.5134;
             User::deposit(converted, 4);        // wplata pieniedzy CHF
             User::withdraw(ammountToChange, 1); // wyplata pieniedzy PLN
         }
@@ -35,7 +35,7 @@ void Bank::changePLN(char firstChoice, char secondChoice) // zamiana PLN-->x, li
         {
             firstCurrency = " Zl";
             secondCurrency = " L";
-            converted = ammountToChange / 5.52;
+            converted = ammountToChange / 5.4708;
             User::deposit(converted, 5);        // wplata pieniedzy GBP
             User::withdraw(ammountToChange, 1); // wyplata pieniedzy PLN
         }
@@ -58,7 +58,7 @@ void Bank::changeEUR(char firstChoice, char secondChoice) // zamiana EUR-->x, li
         {
             firstCurrency = " Euro";
             secondCurrency = " Zl";
-            converted = ammountToChange / 0.21;
+            converted = ammountToChange / 0.2156;
             User::deposit(converted, 1);        // wplata pieniedzy PLN
             User::withdraw(ammountToChange, 2); // wyplata pieniedzy EUR
         }
@@ -66,7 +66,7 @@ void Bank::changeEUR(char firstChoice, char secondChoice) // zamiana EUR-->x, li
         {
             firstCurrency = " Euro";
             secondCurrency = " $";
-            converted = ammountToChange / 0.95;
+            converted = ammountToChange / 0.9452;
             User::deposit(converted, 3);        // wplata pieniedzy USD
             User::withdraw(ammountToChange, 2); // wyplata pieniedzy EUR
         }
@@ -74,7 +74,7 @@ void Bank::changeEUR(char firstChoice, char secondChoice) // zamiana EUR-->x, li
         {
             firstCurrency = " Euro";
             secondCurrency = " Fr";
-            converted = ammountToChange / 0.95;
+            converted = ammountToChange / 0.9726;
             User::deposit(converted, 4);        // wplata pieniedzy CHF
             User::withdraw(ammountToChange, 2); // wyplata pieniedzy EUR
         }
@@ -82,7 +82,7 @@ void Bank::changeEUR(char firstChoice, char secondChoice) // zamiana EUR-->x, li
         {
             firstCurrency = " Euro";
             secondCurrency = " L";
-            converted = ammountToChange / 1.18;
+            converted = ammountToChange / 1.1791;
             User::deposit(converted, 5);        // wplata pieniedzy GBP
             User::withdraw(ammountToChange, 2); // wyplata pieniedzy EUR
         }
@@ -105,7 +105,7 @@ void Bank::changeUSD(char firstChoice, char secondChoice) // zamiana USD-->x, li
         {
             firstCurrency = " $";
             secondCurrency = " Zl";
-            converted = ammountToChange / 0.23;
+            converted = ammountToChange / 0.2281;
             User::deposit(converted, 1);        // wplata pieniedzy PLN
             User::withdraw(ammountToChange, 3); // wyplata pieniedzy USD
         }
@@ -113,7 +113,7 @@ void Bank::changeUSD(char firstChoice, char secondChoice) // zamiana USD-->x, li
         {
             firstCurrency = " $";
             secondCurrency = " Euro";
-            converted = ammountToChange / 1.05;
+            converted = ammountToChange / 1.0579;
             User::deposit(converted, 2);        // wplata pieniedzy EUR
             User::withdraw(ammountToChange, 3); // wyplata pieniedzy USD
         }
@@ -121,7 +121,7 @@ void Bank::changeUSD(char firstChoice, char secondChoice) // zamiana USD-->x, li
         {
             firstCurrency = " $";
             secondCurrency = " Fr";
-            converted = ammountToChange / 1.01;
+            converted = ammountToChange / 1.0295;
             User::deposit(converted, 4);        // wplata pieniedzy CHF
             User::withdraw(ammountToChange, 3); // wyplata pieniedzy USD
         }
@@ -129,7 +129,7 @@ void Bank::changeUSD(char firstChoice, char secondChoice) // zamiana USD-->x, li
         {
             firstCurrency = " $";
             secondCurrency = " L";
-            converted = ammountToChange / 1.25;
+            converted = ammountToChange / 1.2473;
             User::deposit(converted, 5);        // wplata pieniedzy GBP
             User::withdraw(ammountToChange, 3); // wyplata pieniedzy USD
         }
@@ -153,7 +153,7 @@ void Bank::changeCHF(char firstChoice, char secondChoice) // zamiana CHF-->x, li
         {
             firstCurrency = " Fr";
             secondCurrency = " Zl";
-            converted = ammountToChange / 0.23;
+            converted = ammountToChange / 0.2215;
             User::deposit(converted, 1);        // wplata pieniedzy PLN
             User::withdraw(ammountToChange, 4); // wyplata pieniedzy CHF
         }
@@ -161,7 +161,7 @@ void Bank::changeCHF(char firstChoice, char secondChoice) // zamiana CHF-->x, li
         {
             firstCurrency = " Fr";
             secondCurrency = " Euro";
-            converted = ammountToChange / 1.05;
+            converted = ammountToChange / 1.0281;
             User::deposit(converted, 2);        // wplata pieniedzy EUR
             User::withdraw(ammountToChange, 4); // wyplata pieniedzy CHF
         }
@@ -169,7 +169,7 @@ void Bank::changeCHF(char firstChoice, char secondChoice) // zamiana CHF-->x, li
         {
             firstCurrency = " Fr";
             secondCurrency = " $";
-            converted = ammountToChange / 0.99;
+            converted = ammountToChange / 0.9713;
             User::deposit(converted, 3);        // wplata pieniedzy USD
             User::withdraw(ammountToChange, 4); // wyplata pieniedzy CHF
         }
@@ -177,7 +177,7 @@ void Bank::changeCHF(char firstChoice, char secondChoice) // zamiana CHF-->x, li
         {
             firstCurrency = " Fr";
             secondCurrency = " L";
-            converted = ammountToChange / 1.24;
+            converted = ammountToChange / 1.2118;
             User::deposit(converted, 5);        // wplata pieniedzy GBP
             User::withdraw(ammountToChange, 4); // wyplata pieniedzy CHF
         }
@@ -200,7 +200,7 @@ void Bank::changeGBP(char firstChoice, char secondChoice) // zamiana GBP-->x, li
         {
             firstCurrency = " L";
             secondCurrency = " Zl";
-            converted = ammountToChange / 0.18;
+            converted = ammountToChange / 0.1827;
             User::deposit(converted, 1);        // wplata pieniedzy PLN
             User::withdraw(ammountToChange, 5); // wyplata pieniedzy GBP
         }
@@ -208,15 +208,15 @@ void Bank::changeGBP(char firstChoice, char secondChoice) // zamiana GBP-->x, li
         {
             firstCurrency = " L";
             secondCurrency = " Euro";
-            converted = ammountToChange / 0.84;
-            User::deposit(converted, 2);        // wplata pieniedzy EUR
+            converted = ammountToChange / 0.8481;
+            User::deposit(converted, 2);        // wplata pieniedzy EUR 
             User::withdraw(ammountToChange, 5); // wyplata pieniedzy GBP
         }
         if (firstChoice == '5' && secondChoice == '3')
         {
             firstCurrency = " L";
             secondCurrency = " $";
-            converted = ammountToChange / 0.80;
+            converted = ammountToChange / 0.8017;
             User::deposit(converted, 3);        // wplata pieniedzy USD
             User::withdraw(ammountToChange, 5); // wyplata pieniedzy GBP
         }
@@ -224,7 +224,7 @@ void Bank::changeGBP(char firstChoice, char secondChoice) // zamiana GBP-->x, li
         {
             firstCurrency = " L";
             secondCurrency = " Fr";
-            converted = ammountToChange / 0.81;
+            converted = ammountToChange / 0.8252;
             User::deposit(converted, 4);        // wplata pieniedzy CHF
             User::withdraw(ammountToChange, 5); // wyplata pieniedzy GBP
         }
