@@ -2,34 +2,27 @@
 
 bool User::doesUserExist(std::string username, std::string password)
 {
-    std::string passwordinfile = getLineFromFile(username, 0);
+    std::string passwordinfile = db.getLineFromFile(username, 0);
 
     if (password == passwordinfile)
     {
         name = username;
-        PLN = stold(getLineFromFile(username, 1));
-        EUR = stold(getLineFromFile(username, 2));
-        USD = stold(getLineFromFile(username, 3));
-        CHF = stold(getLineFromFile(username, 4));
-        GBP = stold(getLineFromFile(username, 5));
-        piggyAccount = stold(getLineFromFile(username, 6));
+        PLN = stold(db.getLineFromFile(username, 1));
+        EUR = stold(db.getLineFromFile(username, 2));
+        USD = stold(db.getLineFromFile(username, 3));
+        CHF = stold(db.getLineFromFile(username, 4));
+        GBP = stold(db.getLineFromFile(username, 5));
+        piggyAccount = stold(db.getLineFromFile(username, 6));
         return 1;
     }
     return 0;
 }
-std::string User::getLineFromFile(const std::string username, short n)
+
+long double User::getMainBallance()
 {
-    using namespace std;
-    string fileName = username + ".dat";
-    string path = "data\\" + fileName;
-    fstream plik(path, ios::in); // zakładamy, że plik istnieje
-    string lineInFile;
-    for (int i = 0; i < n; i++)         // Przejscie do n lini pliku dat
-        std::getline(plik, lineInFile); // Przejscie do n lini pliku dat
-    std::getline(plik, lineInFile);     // Przejscie do n lini pliku dat
-    plik.close();
-    return lineInFile;
+    return PLN;
 }
+
 bool User::deposit(long double n, short currency)
 {
     using namespace std;
@@ -61,12 +54,12 @@ bool User::deposit(long double n, short currency)
     bufferFile.close();
     remove(path.c_str());
     rename("data\\buffer.dat", path.c_str());
-    PLN = stold(getLineFromFile(name, 1));
-    EUR = stold(getLineFromFile(name, 2));
-    USD = stold(getLineFromFile(name, 3));
-    CHF = stold(getLineFromFile(name, 4));
-    GBP = stold(getLineFromFile(name, 5));
-    piggyAccount = stold(getLineFromFile(name, 6));
+    PLN = stold(db.getLineFromFile(name, 1));
+    EUR = stold(db.getLineFromFile(name, 2));
+    USD = stold(db.getLineFromFile(name, 3));
+    CHF = stold(db.getLineFromFile(name, 4));
+    GBP = stold(db.getLineFromFile(name, 5));
+    piggyAccount = stold(db.getLineFromFile(name, 6));
 
     return 0;
 }
@@ -131,12 +124,12 @@ bool User::withdraw(long double n, short currency)
     bufferFile.close();
     remove(path.c_str());
     rename("data\\buffer.dat", path.c_str());
-    PLN = stold(getLineFromFile(name, 1));
-    EUR = stold(getLineFromFile(name, 2));
-    USD = stold(getLineFromFile(name, 3));
-    CHF = stold(getLineFromFile(name, 4));
-    GBP = stold(getLineFromFile(name, 5));
-    piggyAccount = stold(getLineFromFile(name, 6));
+    PLN = stold(db.getLineFromFile(name, 1));
+    EUR = stold(db.getLineFromFile(name, 2));
+    USD = stold(db.getLineFromFile(name, 3));
+    CHF = stold(db.getLineFromFile(name, 4));
+    GBP = stold(db.getLineFromFile(name, 5));
+    piggyAccount = stold(db.getLineFromFile(name, 6));
     return 1;
 }
 
@@ -179,7 +172,7 @@ short User::Transfer(long double n, short currency, std::string username)
             bufferFile.close();
             remove(path.c_str());
             rename("data\\buffer.dat", path.c_str());
-            raportTransfer(n, currency, username);
+            db.saveTransferToFile(n, currency, name, username);
             return 1;
         }
         else
@@ -192,18 +185,52 @@ short User::Transfer(long double n, short currency, std::string username)
         return 3;
     }
 }
-bool User::raportTransfer(long double n, short currency, std::string username)
+
+void User::raportTransferRead()
+{
+    using namespace std;
+    string fileName = name + +"_transaction_list" + ".dat ";
+    string path = "data\\" + fileName;
+    std::ifstream file(path);
+    std::string line;
+    if (file.is_open())
+    {
+        while (getline(file, line))
+        {
+            std::cout << "          " << line << std::endl;
+        }
+        file.close();
+    }
+    else
+        std::cout << "          Brak transakcji";
+}
+
+std::string User::Database::getLineFromFile(const std::string username, short targetLineNumber)
+{
+    using namespace std;
+    string fileName = username + ".dat";
+    string path = "data\\" + fileName;
+    fstream plik(path, ios::in); // zakładamy, że plik istnieje
+    string lineInFile;
+    for (int i = 0; i < targetLineNumber; i++) // Przejscie do n lini pliku dat
+        std::getline(plik, lineInFile);        // Przejscie do n lini pliku dat
+    std::getline(plik, lineInFile);            // Przejscie do n lini pliku dat
+    plik.close();
+    return lineInFile;
+}
+
+bool User::Database::saveTransferToFile(long double ammount, short currency, std::string currentUsername, std::string targetUsername)
 {
     using namespace std;
     string CurrencyTab[] = {"PLN", "EUR", "USD", "CHF", "GBP"};
-    string fileName = name + +"_transaction_list" + ".dat ";
+    string fileName = currentUsername + +"_transaction_list" + ".dat ";
     string path = "data\\" + fileName;
     string buffer;
 
     if (!ifstream(path))
     {
         ofstream file(path, ios::out);
-        file << "Transakcja nr: 1 Uzytkownik " << name << " wyslal " << n << CurrencyTab[currency - 1] << " do " << username << "\n";
+        file << "Transakcja nr: 1 Uzytkownik " << currentUsername << " wyslal " << ammount << CurrencyTab[currency - 1] << " do " << targetUsername << "\n";
         file.close();
         return 1;
     }
@@ -224,7 +251,7 @@ bool User::raportTransfer(long double n, short currency, std::string username)
     {
         if (i == 0)
         {
-            bufferFile << "Transakcja nr: " << number_of_lines << " Uzytkownik " << name << " wyslal " << n << CurrencyTab[currency - 1] << " do " << username << "\n";
+            bufferFile << "Transakcja nr: " << number_of_lines << " Uzytkownik " << currentUsername << " wyslal " << ammount << CurrencyTab[currency - 1] << " do " << targetUsername << "\n";
         }
         else
         {
@@ -238,22 +265,4 @@ bool User::raportTransfer(long double n, short currency, std::string username)
     rename("data\\buffer.dat", path.c_str());
 
     return 1;
-}
-void User::raportTransferRead()
-{
-    using namespace std;
-    string fileName = name + +"_transaction_list" + ".dat ";
-    string path = "data\\" + fileName;
-    std::ifstream file(path);
-    std::string line;
-    if (file.is_open())
-    {
-        while (getline(file, line))
-        {
-            std::cout << "          " << line << std::endl;
-        }
-        file.close();
-    }
-    else
-        std::cout << "          Brak transakcji";
 }
