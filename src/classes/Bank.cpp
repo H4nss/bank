@@ -209,7 +209,7 @@ void Bank::changeGBP(char firstChoice, char secondChoice) // zamiana GBP-->x, li
             firstCurrency = " L";
             secondCurrency = " Euro";
             converted = ammountToChange / 0.8481;
-            User::deposit(converted, 2);        // wplata pieniedzy EUR
+            User::deposit(converted, 2);        // wplata pieniedzy EUR 
             User::withdraw(ammountToChange, 5); // wyplata pieniedzy GBP
         }
         if (firstChoice == '5' && secondChoice == '3')
